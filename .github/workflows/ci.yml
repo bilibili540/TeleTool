@@ -10,6 +10,8 @@ jobs:
   lint:
     name: Lint & Syntax Check
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
 
     steps:
       - uses: actions/checkout@v4
@@ -26,10 +28,7 @@ jobs:
           pip install -r requirements.txt
 
       - name: Check syntax (py_compile)
-        run: |
-          python -m py_compile main.py
-          python -m py_compile menu/*.py
-          python -m py_compile utils/*.py
+        run: python -m compileall .
 
       - name: Lint with flake8
         run: |
